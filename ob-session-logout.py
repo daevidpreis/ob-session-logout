@@ -23,6 +23,7 @@ class MainWindow:
 
         self.window.connect("destroy", lambda q: Gtk.main_quit())
         self.window.connect('key-press-event', self.window_onkeypress)
+        self.window.connect("focus-out-event", self.window_onblur)
         self.window.set_name("ob-session-logout")
         self.window.set_decorated(0)
         self.window.set_skip_pager_hint(0)
@@ -92,6 +93,10 @@ class MainWindow:
     def window_onkeypress(widget, event):
         if event.keyval == Gdk.KEY_Escape:
             widget.close()
+
+    @staticmethod
+    def window_onblur(widget, event):
+        widget.close()
 
     @staticmethod
     def call_command(command):
