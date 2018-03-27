@@ -95,7 +95,9 @@ class MainWindow:
 
     @staticmethod
     def call_command(command):
-        subprocess.Popen(command.split())
+        cmds = command.split(";")
+        for cmd in cmds:
+            subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE, stdin=subprocess.PIPE)
 
     def call_logout(self):
         self.call_command(self.config.logout_cmd)
